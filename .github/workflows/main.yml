@@ -46,7 +46,14 @@ jobs:
           # args: # optional, default is -pdf -latexoption=-file-line-error -latexoption=-interaction=nonstopmode
           # Install extra packages by apt-get
           # extra_system_packages: # optional
-      - uses: actions/upload-artifact@v2
-        with:
-          name: PDF
-          path: main.pdf
+#       - uses: actions/upload-artifact@v2
+#         with:
+#           name: PDF
+#           path: main.pdf
+      - name: Publish LaTeX
+        run : |
+          git config --global user.email "bot@example.org"
+          git config --global user.name "BOT_WORKFLOW"
+          git add -f $PWD/*.pdf
+          git commit -m "WORKFLOW_COMMIT - Update PDFs [skip ci]"
+          git push
